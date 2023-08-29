@@ -1,7 +1,7 @@
 import sys
 from PyQt6.QtWidgets import *
 from PyQt6.QtGui import *
-from calc_main_window import CalcMainWindow
+from calc_main_window import CalculatorMainWindow
 from calc_view import CalculatorView
 
 
