@@ -1,17 +1,21 @@
 import sys
-import os
-from PyQt5.QtWidgets import QApplication
+from PyQt6.QtWidgets import *
+from PyQt6.QtGui import *
 from calc_main_window import CalcMainWindow
 from calc_view import SimpleCalcView
 
-if __name__ == '__main__':
-    os.environ["QT_QPA_PLATFORM_PLUGIN_PATH"] = "venv/Lib/site-packages/PyQt5/Qt5/plugins/platforms"
 
+if __name__ == "__main__":
     app = QApplication(sys.argv)
 
-    window = CalcMainWindow('Simple Calculator v1.0')
-    view = SimpleCalcView()
+    window_size = 300
 
-    window.set_view(view)
-    window.show()
+    main_window = CalcMainWindow("Calculator")
+    layout = SimpleCalcView()
+
+    main_window.setFixedSize(window_size, window_size)
+    main_window.setFont(QFont("Times", 12))
+
+    main_window.set_view(layout)
+    main_window.show()
     app.exec()
