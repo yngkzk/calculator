@@ -2,7 +2,7 @@ import sys
 from PyQt6.QtWidgets import *
 from PyQt6.QtGui import *
 from calc_main_window import CalcMainWindow
-from calc_view import SimpleCalcView
+from calc_view import CalculatorView
 
 
 if __name__ == "__main__":
@@ -10,8 +10,8 @@ if __name__ == "__main__":
 
     window_size = 300
 
-    main_window = CalcMainWindow("Calculator")
-    layout = SimpleCalcView()
+    main_window = CalculatorMainWindow("Calculator")
+    layout = CalculatorView()
 
     main_window.setFixedSize(window_size, window_size)
     main_window.setFont(QFont("Times", 12))

@@ -1,59 +1,55 @@
 from PyQt6.QtWidgets import *
+from PyQt6.QtGui import QFont
+from PyQt6.QtCore import Qt
 
 
-class SimpleCalcView(QWidget):
+class CalculatorView(QWidget):
     main_display: QLabel = None
+
+    display_height = 50
+    button_size = 50
+
+    text = ""
 
     def __init__(self):
         super().__init__()
-        main_layout = QVBoxLayout()
-        self.setLayout(main_layout)
+        mainLayout = QVBoxLayout()
 
-        main_layout.addWidget(self.main_display)
+        self.main_display = QLabel(text="0")
+        self.main_display.setFixedHeight(self.display_height)
+        self.main_display.setFont(QFont('Monospace', 20, QFont.Weight.Normal, False))
+        self.main_display.setAlignment(Qt.AlignmentFlag.AlignRight)
+        mainLayout.addWidget(self.main_display)
 
-        # Int buttons
+        buttonsLayout = QGridLayout()
+        mainLayout.addLayout(buttonsLayout)
+        buttonMap = {}
+        keyBoard = [
+            ["7", "8", "9", "/", "C"],
+            ["4", "5", "6", "*", "("],
+            ["1", "2", "3", "-", ")"],
+            ["0", "00", ".", "+", "="],
+        ]
 
-        button1 = QPushButton("1")
-        button2 = QPushButton("2")
-        button3 = QPushButton("3")
-        button4 = QPushButton("4")
-        button5 = QPushButton("5")
-        button6 = QPushButton("6")
-        button7 = QPushButton("7")
-        button8 = QPushButton("8")
-        button9 = QPushButton("9")
-        button0 = QPushButton("0")
+        for row, keys in enumerate(keyBoard):
+            for col, key in enumerate(keys):
+                buttonMap[key] = QPushButton(key)
+                buttonMap[key].clicked.connect(lambda ch, button=buttonMap[key]: self.pressed_btn(button))
+                buttonMap[key].setFixedSize(self.button_size, self.button_size)
+                buttonsLayout.addWidget(buttonMap[key], row, col)
 
-        layout = QGridLayout()
-        main_layout.addLayout(layout)
+        self.setLayout(mainLayout)
 
-        # Int widgets
+    def pressed_btn(self, button):
+        button_text = button.text()
+        if button_text != "=":
+            if button_text == "C":
+                self.text = "0"
+            elif button_text == "0":
+                self.text = button_text
+            else:
+                self.text += button_text
+        else:
+            self.text = str(eval(self.text))
 
-        layout.addWidget(button1, 3, 0)
-        layout.addWidget(button2, 3, 1)
-        layout.addWidget(button3, 3, 2)
-        layout.addWidget(button4, 2, 0)
-        layout.addWidget(button5, 2, 1)
-        layout.addWidget(button6, 2, 2)
-        layout.addWidget(button7, 1, 0)
-        layout.addWidget(button8, 1, 1)
-        layout.addWidget(button9, 1, 2)
-        layout.addWidget(button0, 4, 1)
-
-        # Math symbols
-
-        button_1 = QPushButton("/")
-        button_2 = QPushButton("*")
-        button_3 = QPushButton("-")
-        button_4 = QPushButton("+")
-        button_5 = QPushButton("=")
-        button_6 = QPushButton(".")
-
-        # Math widgets
-
-        layout.addWidget(button_1, 1, 3)
-        layout.addWidget(button_2, 2, 3)
-        layout.addWidget(button_3, 3, 3)
-        layout.addWidget(button_4, 4, 3)
-        layout.addWidget(button_5, 4, 2)
-        layout.addWidget(button_6, 4, 0)
+        self.main_display.setText(self.text)

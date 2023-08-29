@@ -1,7 +1,7 @@
 from PyQt6.QtWidgets import QMainWindow
 
 
-class CalcMainWindow(QMainWindow):
+class CalculatorMainWindow(QMainWindow):
     calc_view = None
 
     def __init__(self, title):
