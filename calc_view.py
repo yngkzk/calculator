@@ -34,22 +34,9 @@ class CalculatorView(QWidget):
         for row, keys in enumerate(keyBoard):
             for col, key in enumerate(keys):
                 buttonMap[key] = QPushButton(key)
-                buttonMap[key].clicked.connect(lambda ch, button=buttonMap[key]: self.pressed_btn(button))
+                # buttonMap[key].clicked.connect(lambda ch, button=buttonMap[key]: self.pressed_btn(button))
                 buttonMap[key].setFixedSize(self.button_size, self.button_size)
                 buttonsLayout.addWidget(buttonMap[key], row, col)
 
         self.setLayout(mainLayout)
 
-    def pressed_btn(self, button):
-        button_text = button.text()
-        if button_text != "=":
-            if button_text == "C":
-                self.text = "0"
-            elif button_text == "0":
-                self.text = button_text
-            else:
-                self.text += button_text
-        else:
-            self.text = str(eval(self.text))
-
-        self.main_display.setText(self.text)
