@@ -9,7 +9,7 @@ from calc_model import SimpleCalcModel
 if __name__ == "__main__":
     app = QApplication(sys.argv)
 
-    window_size = 300
+    window_size = 370
 
     main_window = CalculatorMainWindow("Calculator")
     layout = CalculatorView()

@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="149d8543-0085-4ce8-8673-52d9d7d78791" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/calc_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/calc_model.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/calc_view.py" beforeDir="false" afterPath="$PROJECT_DIR$/calc_view.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
@@ -24,6 +23,7 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$USER_HOME$/AppData/Local/Programs/Python/Python311/Lib/re/__init__.py" root0="SKIP_INSPECTION" />
+    <setting file="file://$USER_HOME$/AppData/Local/Programs/Python/Python311/Lib/warnings.py" root0="SKIP_INSPECTION" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
