@@ -4,6 +4,7 @@ from PyQt6.QtCore import Qt
 
 
 class CalculatorView(QWidget):
+    calc_model = None
     main_display: QLabel = None
 
     display_height = 50
@@ -11,6 +12,12 @@ class CalculatorView(QWidget):
 
     text = ""
 
+    def on_button_pressed(self):
+        btn = self.sender()
+        key_text = btn.text()
+        self.calc_model.command(key_text)
+        self.main_display.setText(self.calc_model.get_display())
+        
     def __init__(self):
         super().__init__()
         mainLayout = QVBoxLayout()
@@ -34,9 +41,12 @@ class CalculatorView(QWidget):
         for row, keys in enumerate(keyBoard):
             for col, key in enumerate(keys):
                 buttonMap[key] = QPushButton(key)
-                # buttonMap[key].clicked.connect(lambda ch, button=buttonMap[key]: self.pressed_btn(button))
+                buttonMap[key].clicked.connect(self.on_button_pressed)
                 buttonMap[key].setFixedSize(self.button_size, self.button_size)
                 buttonsLayout.addWidget(buttonMap[key], row, col)
 
         self.setLayout(mainLayout)
 
+    def set_model(self, model):
+        self.calc_model = model
+        self.main_display.setText(self.calc_model.get_display())

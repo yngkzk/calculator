@@ -59,7 +59,7 @@ class SimpleCalcModel:
             if self.__display.count('(') > self.__display.count(')'):
                 self.__display += ')' * int(self.__display.count('(') - self.__display.count(')'))
                 index = self.__display.rfind('(')
-                numbers = re.split(r'[ +\-*/\()]+', self.__display)
+                numbers = re.split(r'[ +\-*/\().]+', self.__display)
                 self.__display = list(self.__display)
                 self.__display.insert(index + 1, numbers[-2])
                 self.__display = ''.join(self.__display)
