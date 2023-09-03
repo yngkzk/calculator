@@ -3,7 +3,7 @@ from PyQt6.QtGui import QFont
 from PyQt6.QtCore import Qt
 
 
-class CalculatorView(QWidget):
+class MathematicalCalcView(QWidget):
     calc_model = None
     main_display: QLabel = None
 
@@ -22,7 +22,7 @@ class CalculatorView(QWidget):
         hallo = self.sender().text()
         if self.sender().isChecked():
             print(hallo)
-        
+
     def __init__(self):
         super().__init__()
         mainLayout = QVBoxLayout()
@@ -47,10 +47,10 @@ class CalculatorView(QWidget):
         mainLayout.addLayout(buttonsLayout)
         buttonMap = {}
         keyBoard = [
-            ["7", "8", "9", "/", "C"],
-            ["4", "5", "6", "*", "("],
-            ["1", "2", "3", "-", ")"],
-            ["0", "00", ".", "+", "="],
+            ["7", "8", "9", "/", "C", "log", "sin"],
+            ["4", "5", "6", "*", "(", "2√x", "cos"],
+            ["1", "2", "3", "-", ")", "x²", "tan"],
+            ["0", "00", ".", "+", "=", "x^Y", "cot"],
         ]
 
         for row, keys in enumerate(keyBoard):
@@ -65,4 +65,3 @@ class CalculatorView(QWidget):
     def set_model(self, model):
         self.calc_model = model
         self.main_display.setText(self.calc_model.get_display())
-
