@@ -21,3 +21,6 @@ if __name__ == "__main__":
     main_window.set_view(layout)
     main_window.show()
     app.exec()
+
+#  QWidget.SetFocusPolicy()
+#  super().__init__() надо писать в конце (!!)

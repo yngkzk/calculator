@@ -7,9 +7,9 @@ class CalculatorView(QWidget):
     calc_model = None
     main_display: QLabel = None
 
-    window_size = 370
+    window_size = 400
 
-    display_height = 50
+    display_height = 30
     button_size = 50
 
     def on_button_pressed(self):
