@@ -1,14 +1,20 @@
 from PyQt6.QtWidgets import *
+from PyQt6.QtCore import pyqtSignal
+
 
 class CalcControlWidget(QWidget):
+    switched: pyqtSignal = None
 
     def calc_mode_switch(self):
         radiobutton = self.sender()
         if radiobutton.isChecked():
-            print(radiobutton)
+            text = radiobutton.text()
+            self.switched.emit(text)
 
     def __init__(self):
         super().__init__()
+        self.switched = pyqtSignal(str)
+
         main_layout = QVBoxLayout()
         self.setLayout(main_layout)
 
