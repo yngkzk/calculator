@@ -20,11 +20,17 @@ def switch_mode(name):
 if __name__ == "__main__":
     app = QApplication(sys.argv)
 
-    main_window = CalculatorMainWindow("Calculator")
-    view = MathematicalCalcView()
-    model = MathematicalCalcModel()
+    with open("styleMath.css", "r") as file:
+        app.setStyleSheet(file.read())
 
-    main_window.setFixedSize(CalculatorView.window_size, CalculatorView.window_size)
+    main_window = CalculatorMainWindow("Calculator")
+    view = CalculatorView()
+    model = CalculatorModel()
+
+    # view = MathematicalCalcView()
+    # model = MathematicalCalcModel()
+
+    main_window.setFixedSize(view.width, view.height)
     main_window.setFont(QFont("Times", 12))
 
     switch = CalcControlWidget()

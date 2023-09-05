@@ -7,10 +7,12 @@ class CalculatorView(QWidget):
     calc_model = None
     main_display: QLabel = None
 
-    window_size = 350
+    height = 325
+    width = 350
 
     display_height = 50
-    button_size = 50
+    button_height = 50
+    button_width = 60
 
     def on_button_pressed(self):
         btn = self.sender()
@@ -42,7 +44,7 @@ class CalculatorView(QWidget):
             for col, key in enumerate(keys):
                 buttonMap[key] = QPushButton(key)
                 buttonMap[key].clicked.connect(self.on_button_pressed)
-                buttonMap[key].setFixedSize(self.button_size, self.button_size)
+                buttonMap[key].setFixedSize(self.button_width, self.button_height)
                 buttonsLayout.addWidget(buttonMap[key], row, col)
 
         self.setLayout(mainLayout)

@@ -28,7 +28,7 @@ class CalcControlWidget(QWidget):
         accounting.toggled.connect(self.calc_mode_switch)
         mathematical.toggled.connect(self.calc_mode_switch)
 
-        simple.move(10, 0)
-        accounting.move(85, 0)
-        mathematical.move(195, 0)
+        simple.move(10, -5)
+        accounting.move(75, -5)
+        mathematical.move(165, -5)
 

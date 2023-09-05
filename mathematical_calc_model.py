@@ -32,7 +32,12 @@ class MathematicalCalcModel(CalculatorModel):
                 self._display = ''.join(self._display)
 
             if key == "x^Y":
-                pass
+                self._display = list(self._display)
+                cut_word = [')', '*', '*']
+                for x in range(3):
+                    self._display.append(cut_word[x])
+                self._display.insert(0, '(')
+                self._display = ''.join(self._display)
 
             if key == "sin":
                 self._display = list(self._display)
@@ -69,11 +74,21 @@ class MathematicalCalcModel(CalculatorModel):
                 self._display = str(result)
 
             if key == "|x|":
-                pass
-
+                self._display = float(eval(self._display))
+                number_module = str(self._display).split('.')
+                self._display = abs(int(number_module[0]))
+                self._display = str(self._display)
             if key == "x!":
-                pass
-
+                self._display = float(eval(self._display))
+                num = 1
+                while self._display >= 1:
+                    num = num * self._display
+                    self._display = self._display - 1
+                float_number = str(num).split('.')
+                if float_number[1] == '0':
+                    self._display = float_number[0]
+                else:
+                    self._display = ''.join(float_number)
         else:
             super(MathematicalCalcModel, self).command(key)
 
@@ -93,7 +108,7 @@ if __name__ == '__main__':
     calc.command('+')
     calc.command('7')
     calc.command(')')
-    calc.command('x²')
+    calc.command('|x|')
     print(calc.get_display())
     calc.command('=')
 

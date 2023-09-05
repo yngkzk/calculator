@@ -20,7 +20,3 @@ class CalculatorMainWindow(QMainWindow):
     def set_switcher(self, widget):
         self.calc_layout.addWidget(widget, 0, 0)
 
-    def set_model(self, model):
-        self.calc_model = model
-        if self.calc_view:
-            self.calc_view.setText(self.calc_model.get_display())

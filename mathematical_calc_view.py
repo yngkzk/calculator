@@ -3,6 +3,8 @@ from calc_view import CalculatorView
 
 
 class MathematicalCalcView(CalculatorView):
+    height = 450
+    width = 350
 
     def __init__(self):
         super().__init__()
@@ -18,5 +20,5 @@ class MathematicalCalcView(CalculatorView):
             for col, key in enumerate(keys):
                 buttonMap[key] = QPushButton(key)
                 buttonMap[key].clicked.connect(self.on_button_pressed)
-                buttonMap[key].setFixedSize(self.button_size, self.button_size)
+                buttonMap[key].setFixedSize(self.button_width, self.button_height)
                 keys_layout.addWidget(buttonMap[key], row, col)
