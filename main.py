@@ -25,20 +25,23 @@ def switch_mode(name):
         view = options[name]["view"]() 
         view.set_model(model)
         window.set_view(view)
+        window.setFixedSize(view.width, view.height)
 
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     window = CalculatorMainWindow("Calculator")
-    
-    window.setFixedSize(CalculatorView.window_size, CalculatorView.window_size)
+
+    switch_mode("Simple")
+
     window.setFont(QFont("Times", 12))
+
+    with open("style.css", "r") as file_sheet:
+        app.setStyleSheet(file_sheet.read())
 
     switch = CalcControlWidget(tuple(options.keys()))
     switch.switched.connect(switch_mode)
     window.set_switch(switch)
-
-    switch_mode("Simple")
 
     window.show()
     app.exec()
