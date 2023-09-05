@@ -29,19 +29,22 @@ def swich_mode(name):
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     window = CalculatorMainWindow("Calculator")
+
+    file = open("style.css", "r", encoding="utf-8")
+    style  = file.read() 
+    file.close() 
+
     
     window.setFixedSize(CalculatorView.window_size, CalculatorView.window_size)
     window.setFont(QFont("Times", 12))
-
-    # view = CalculatorView() 
-    # model = SimpleCalcModel()
 
     switch = CalcControlWidget(tuple(options.keys()))
     switch.switched.connect(swich_mode)
     window.set_switch(switch)
 
-    # view.set_model(model)
-    
-    # window.set_view(view)
+    swich_mode("Simple")
+
     window.show()
+
+    app.setStyleSheet(style)
     app.exec()

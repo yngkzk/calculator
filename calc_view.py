@@ -54,7 +54,7 @@ class CalculatorView(QWidget):
             for col, key in enumerate(keys):
                 buttonMap[key] = QPushButton(key)
                 buttonMap[key].clicked.connect(self.on_button_pressed)
-                buttonMap[key].setFixedSize(self.button_size, self.button_size)
+                buttonMap[key].setFixedHeight(self.button_size)
                 buttonsLayout.addWidget(buttonMap[key], row, col)
 
         return buttonsLayout
