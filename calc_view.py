@@ -7,10 +7,12 @@ class CalculatorView(QWidget):
     calc_model = None
     main_display: QLabel = None
 
-    window_size = 450
-    display_height = 50
-    button_size = 50
+    height = 375
+    width = 400
 
+    display_height = 50
+    button_height = 50
+    button_width = 60
 
     keyBoard = [
             ["7", "8", "9", "/", "C"],
@@ -30,8 +32,7 @@ class CalculatorView(QWidget):
         self.calc_model.command(key_text)
         self.main_display.setText(self.calc_model.get_display())
         super().keyPressEvent(event)
-       
-        
+
     def __init__(self):
         super().__init__()
         mainLayout = QVBoxLayout()
@@ -45,7 +46,6 @@ class CalculatorView(QWidget):
 
         mainLayout.addLayout(self.create_buttons(self.keyBoard))
 
-    
     def create_buttons(self, keyBoard): 
         buttonsLayout = QGridLayout()
         buttonMap = {}
@@ -55,6 +55,7 @@ class CalculatorView(QWidget):
                 buttonMap[key] = QPushButton(key)
                 buttonMap[key].clicked.connect(self.on_button_pressed)
                 buttonMap[key].setFixedHeight(self.button_size)
+
                 buttonsLayout.addWidget(buttonMap[key], row, col)
 
         return buttonsLayout

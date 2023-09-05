@@ -18,17 +18,20 @@ options = {
     "Account": {"model": AccountCalcModel, "view": AccountingCalculatorView}
 }
 
-def swich_mode(name):
+
+def switch_mode(name):
     if name in options: 
         model = options[name]["model"]() 
         view = options[name]["view"]() 
         view.set_model(model)
         window.set_view(view)
+        window.setFixedSize(view.width, view.height)
 
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     window = CalculatorMainWindow("Calculator")
+
 
     file = open("style.css", "r", encoding="utf-8")
     style  = file.read() 
@@ -39,10 +42,10 @@ if __name__ == "__main__":
     window.setFont(QFont("Times", 12))
 
     switch = CalcControlWidget(tuple(options.keys()))
-    switch.switched.connect(swich_mode)
+    switch.switched.connect(switch_mode)
     window.set_switch(switch)
 
-    swich_mode("Simple")
+    switch_mode("Simple")
 
     window.show()
 
