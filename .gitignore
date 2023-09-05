@@ -1,3 +1,6 @@
 venv
 .idea/workspace.xml
 .idea/misc.xml
+*.pyc
+*.pyc
+__pycache__/calc_model.cpython-310.pyc

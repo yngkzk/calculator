@@ -18,7 +18,8 @@ options = {
     "Account": {"model": AccountCalcModel, "view": AccountingCalculatorView}
 }
 
-def swich_mode(name):
+
+def switch_mode(name):
     if name in options: 
         model = options[name]["model"]() 
         view = options[name]["view"]() 
@@ -33,15 +34,11 @@ if __name__ == "__main__":
     window.setFixedSize(CalculatorView.window_size, CalculatorView.window_size)
     window.setFont(QFont("Times", 12))
 
-    # view = CalculatorView() 
-    # model = SimpleCalcModel()
-
     switch = CalcControlWidget(tuple(options.keys()))
-    switch.switched.connect(swich_mode)
+    switch.switched.connect(switch_mode)
     window.set_switch(switch)
 
-    # view.set_model(model)
-    
-    # window.set_view(view)
+    switch_mode("Simple")
+
     window.show()
     app.exec()
