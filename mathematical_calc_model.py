@@ -1,132 +1,81 @@
-import re
 from math import *
+from calc_model import CalculatorModel
 
 
-class MathematicalCalcModel:
-    __display = '0'
-
-    def calculate(self):
-        try:
-            result = eval(self.__display)
-            self.__display = str(result)
-        except SyntaxError:
-            self.__display = 'Err...'
+class MathematicalCalcModel(CalculatorModel):
+    _display = '0'
 
     def command(self, key: str):
-        if key != "=":
-            if key.isdigit():
-                if self.__display == "0":
-                    self.__display = key
-                else:
-                    if key == "0" or key == "00":
-                        if self.__display[-1] not in "+-*/":
-                            if self.__display[-1] == '.':
-                                self.__display += key
-                            elif int(self.__display[-1]) > 0:
-                                self.__display += key
-                    else:
-                        self.__display += key
-            else:
-                if key in '()':
-                    if self.__display[-1] not in "+-*/":
-                        if key == '(':
-                            if self.__display == '0':
-                                self.__display = key
-                            elif self.__display[-1] == '.':
-                                self.__display = self.__display[:-1] + "*" + key
-                            elif self.__display[-1].isdigit() or self.__display[-1] == ')':
-                                self.__display += "*" + key
-                            else:
-                                self.__display += key
-                        elif key == ')':
-                            if self.__display[-1] == '(':
-                                self.__display += '0' + key
-                            if self.__display.count('(') > self.__display.count(')'):
-                                self.__display += key
-                    else:
-                        self.__display += key
-                else:
-                    if key in ["log", "2√x", "x²", "x^Y", "sin", "cos", "tan", "cot"]:
-                        if key == "log":
-                            pass
-
-                        if key == "2√x":
-                            pass
-
-                        if key == "x²":
-                            pass
-
-                        if key == "x^Y":
-                            pass
-
-                        if key == "sin":
-                            pass
-
-                        if key == "cos":
-                            pass
-
-                        if key == "tan":
-                            pass
-
-                        if key == "cot":
-                            pass
-                    else:
-                        if self.__display == '0':
-                            self.__display = key
-                        if key == ".":
-                            if "." in self.__display:
-                                self.__display = self.__display
-                            else:
-                                self.__display += key
-                        else:
-                            self.__display += key
-
-            if key == "C":
-                self.__display = "0"
-
+        if key in ["log", "2√x", "x²", "x^Y", "sin", "cos", "tan", "cot", "|x|", "x!"]:
             if key == "log":
-                pass
+                self._display = list(self._display)
+                cut_word = ['l', 'o', 'g', '10', '(']
+                for x in range(5):
+                    self._display.insert(x, cut_word[x])
+                self._display.append(')')
+                self._display = ''.join(self._display)
 
             if key == "2√x":
-                pass
+                self._display = list(self._display)
+                cut_word = [')', '*', '*', '0.5']
+                for x in range(4):
+                    self._display.append(cut_word[x])
+                self._display.insert(0, '(')
+                self._display = ''.join(self._display)
 
             if key == "x²":
-                pass
+                self._display = list(self._display)
+                cut_word = [')', '*', '*', '2']
+                for x in range(4):
+                    self._display.append(cut_word[x])
+                self._display.insert(0, '(')
+                self._display = ''.join(self._display)
 
             if key == "x^Y":
                 pass
 
             if key == "sin":
-                pass
+                self._display = list(self._display)
+                cut_word = ['s', 'i', 'n', '(']
+                for x in range(4):
+                    self._display.insert(x, cut_word[x])
+                self._display.append(')')
+                self._display = ''.join(self._display)
 
             if key == "cos":
-                pass
+                self._display = list(self._display)
+                cut_word = ['c', 'o', 's', '(']
+                for x in range(4):
+                    self._display.insert(x, cut_word[x])
+                self._display.append(')')
+                self._display = ''.join(self._display)
 
             if key == "tan":
-                pass
+                self._display = list(self._display)
+                cut_word = ['t', 'a', 'n', '(']
+                for x in range(4):
+                    self._display.insert(x, cut_word[x])
+                self._display.append(')')
+                self._display = ''.join(self._display)
 
             if key == "cot":
+                self._display = list(self._display)
+                cut_word = ['t', 'a', 'n', '(']
+                for x in range(4):
+                    self._display.insert(x, cut_word[x])
+                self._display.append(')')
+                self._display = ''.join(self._display)
+                result = 1 / float(eval(self._display))
+                self._display = str(result)
+
+            if key == "|x|":
+                pass
+
+            if key == "x!":
                 pass
 
         else:
-            if self.__display.count('(') > self.__display.count(')'):
-                self.__display += ')' * int(self.__display.count('(') - self.__display.count(')'))
-                index = self.__display.rfind('(')
-                numbers = re.split(r'[ +\-*/\().]+', self.__display)
-                self.__display = list(self.__display)
-                self.__display.insert(index + 1, numbers[-2])
-                self.__display = ''.join(self.__display)
-
-            elif self.__display[-1] == '(':
-                self.__display = self.__display[:-2]
-
-            elif self.__display[-1] in '+-*/':
-                self.__display = self.__display[:-1]
-            print(self.__display)
-            self.calculate()
-
-    def get_display(self):
-        return self.__display
+            super(MathematicalCalcModel, self).command(key)
 
 
 if __name__ == '__main__':
@@ -134,7 +83,7 @@ if __name__ == '__main__':
     calc = MathematicalCalcModel()
 
     calc.command('(')
-    calc.command('9')
+    calc.command('10')
     calc.command('-')
     calc.command('7')
     calc.command(')')
@@ -142,9 +91,9 @@ if __name__ == '__main__':
     calc.command('(')
     calc.command('3')
     calc.command('+')
-    calc.command('4')
+    calc.command('7')
     calc.command(')')
-    calc.command('(')
+    calc.command('x²')
     print(calc.get_display())
     calc.command('=')
 

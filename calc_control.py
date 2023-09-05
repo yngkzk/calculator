@@ -3,26 +3,32 @@ from PyQt6.QtCore import pyqtSignal
 
 
 class CalcControlWidget(QWidget):
-    switched: pyqtSignal = None
+    # switched: pyqtSignal = None
 
     def calc_mode_switch(self):
-        radiobutton = self.sender()
-        if radiobutton.isChecked():
-            text = radiobutton.text()
-            self.switched.emit(text)
+        pass
+    #     radiobutton = self.sender()
+    #     if radiobutton.isChecked():
+    #         text = radiobutton.text()
 
     def __init__(self):
         super().__init__()
-        self.switched = pyqtSignal(str)
+        # self.switched = pyqtSignal(str)
 
         main_layout = QVBoxLayout()
         self.setLayout(main_layout)
 
-        simple = QRadioButton('Simple')
-        simple.setChecked(True)
-        simple.toggled.connect(self.calc_mode_switch)
-        main_layout.addWidget(simple)
+        simple = QRadioButton('Simple', self)
+        accounting = QRadioButton('Accounting', self)
+        mathematical = QRadioButton('Mathematical', self)
 
-        account = QRadioButton('Account')
-        account.toggled.connect(self.calc_mode_switch)
-        main_layout.addWidget(account)
+        simple.setChecked(True)
+
+        simple.toggled.connect(self.calc_mode_switch)
+        accounting.toggled.connect(self.calc_mode_switch)
+        mathematical.toggled.connect(self.calc_mode_switch)
+
+        simple.move(10, 0)
+        accounting.move(85, 0)
+        mathematical.move(195, 0)
+

@@ -3,7 +3,6 @@ from calc_view import CalculatorView
 
 
 class MathematicalCalcView(CalculatorView):
-    CalculatorView.window_size = 440
 
     def __init__(self):
         super().__init__()
@@ -11,8 +10,8 @@ class MathematicalCalcView(CalculatorView):
         self.layout().addLayout(keys_layout)
         buttonMap = {}
         keyBoard = [
-            ["sin", "cos", "6", "7", "8"],
-            ["tan", "cot", "6", "7", "8"],
+            ["sin", "cos", "log", "x²", "|x|"],
+            ["tan", "cot", "2√x", "x^Y", "x!"],
         ]
 
         for row, keys in enumerate(keyBoard):

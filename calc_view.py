@@ -7,9 +7,9 @@ class CalculatorView(QWidget):
     calc_model = None
     main_display: QLabel = None
 
-    window_size = 400
+    window_size = 350
 
-    display_height = 30
+    display_height = 50
     button_size = 50
 
     def on_button_pressed(self):
@@ -17,11 +17,6 @@ class CalculatorView(QWidget):
         key_text = btn.text()
         self.calc_model.command(key_text)
         self.main_display.setText(self.calc_model.get_display())
-
-    def on_toggled(self):
-        hallo = self.sender().text()
-        if self.sender().isChecked():
-            print(hallo)
         
     def __init__(self):
         super().__init__()
@@ -32,16 +27,6 @@ class CalculatorView(QWidget):
         self.main_display.setFont(QFont('Monospace', 20, QFont.Weight.Normal, False))
         self.main_display.setAlignment(Qt.AlignmentFlag.AlignRight)
         mainLayout.addWidget(self.main_display)
-
-        simple = QRadioButton('Simple', self)
-        accounting = QRadioButton('Accounting', self)
-        mathematical = QRadioButton('Mathematical', self)
-        simple.toggled.connect(self.on_toggled)
-        accounting.toggled.connect(self.on_toggled)
-        mathematical.toggled.connect(self.on_toggled)
-        simple.move(10, 0)
-        accounting.move(85, 0)
-        mathematical.move(195, 0)
 
         buttonsLayout = QGridLayout()
         mainLayout.addLayout(buttonsLayout)
@@ -65,4 +50,3 @@ class CalculatorView(QWidget):
     def set_model(self, model):
         self.calc_model = model
         self.main_display.setText(self.calc_model.get_display())
-
