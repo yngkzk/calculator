@@ -1,47 +1,47 @@
 import sys
 from PyQt6.QtWidgets import *
 from PyQt6.QtGui import *
+
 from calc_main_window import CalculatorMainWindow
+
 from calc_view import CalculatorView
-from calc_model import CalculatorModel
-from mathematical_calc_view import MathematicalCalcView
+from calc_model import SimpleCalcModel
+
+
+from accounting_calc_view import AccountingCalculatorView
+from accounting_calc_model import AccountCalcModel
+
 from calc_control import CalcControlWidget
-from mathematical_calc_model import MathematicalCalcModel
 
+options = {
+    "Simple": {"model": SimpleCalcModel, "view": CalculatorView}, 
+    "Account": {"model": AccountCalcModel, "view": AccountingCalculatorView}
+}
 
-def switch_mode(name):
-    if name == 'Account':
-        # model = AccountCalcModel()
-        # view = AccountCalcView()
+def swich_mode(name):
+    if name in options: 
+        model = options[name]["model"]() 
+        view = options[name]["view"]() 
         view.set_model(model)
-        main_window.set_view(view)
+        window.set_view(view)
 
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
+    window = CalculatorMainWindow("Calculator")
+    
+    window.setFixedSize(CalculatorView.window_size, CalculatorView.window_size)
+    window.setFont(QFont("Times", 12))
 
-    with open("styleMath.css", "r") as file:
-        app.setStyleSheet(file.read())
+    # view = CalculatorView() 
+    # model = SimpleCalcModel()
 
-    main_window = CalculatorMainWindow("Calculator")
-    view = CalculatorView()
-    model = CalculatorModel()
+    switch = CalcControlWidget(tuple(options.keys()))
+    switch.switched.connect(swich_mode)
+    window.set_switch(switch)
 
-    # view = MathematicalCalcView()
-    # model = MathematicalCalcModel()
-
-    main_window.setFixedSize(view.width, view.height)
-    main_window.setFont(QFont("Times", 12))
-
-    switch = CalcControlWidget()
-    # switch.switched.connect(switch_mode)
-    main_window.set_switcher(switch)
-
-    view.set_model(model)
-
-    main_window.set_view(view)
-    main_window.show()
+    # view.set_model(model)
+    
+    # window.set_view(view)
+    window.show()
     app.exec()
-
-#  QWidget.SetFocusPolicy()
-#  super().__init__() надо писать в конце (!!), но только с model (!!!)
