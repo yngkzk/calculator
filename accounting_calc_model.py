@@ -1,5 +1,6 @@
 from calc_model import SimpleCalcModel
 
+
 class AccountCalcModel(SimpleCalcModel): 
     memory = 0 
 

@@ -14,7 +14,7 @@ class AccountingCalculatorView(CalculatorView):
             ["0", "00", ".", "+", "="],
     ]
 
-    height = 430
+    height = 510
     width = 400
 
     def __init__(self):  

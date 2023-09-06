@@ -7,7 +7,7 @@ class CalculatorView(QWidget):
     calc_model = None
     main_display: QLabel = None
 
-    height = 375
+    height = 460
     width = 400
 
     display_height = 50
@@ -54,7 +54,7 @@ class CalculatorView(QWidget):
             for col, key in enumerate(keys):
                 buttonMap[key] = QPushButton(key)
                 buttonMap[key].clicked.connect(self.on_button_pressed)
-                buttonMap[key].setFixedHeight(self.button_size)
+                buttonMap[key].setFixedHeight(self.button_height)
 
                 buttonsLayout.addWidget(buttonMap[key], row, col)
 

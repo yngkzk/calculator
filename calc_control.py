@@ -17,7 +17,6 @@ class CalcControlWidget(QWidget):
         main_layout = QVBoxLayout()
         self.setLayout(main_layout)
 
-
         for i in range(len(options)): 
             radioButton = QRadioButton(text=options[i])
             radioButton.toggled.connect(self.calc_mode_switch)
@@ -25,8 +24,3 @@ class CalcControlWidget(QWidget):
     
             if i == 0: 
                 radioButton.setChecked(True)
-        
-
-        # simple.move(10, 0)
-        # accounting.move(85, 0)
-        # mathematical.move(195, 0)
