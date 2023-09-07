@@ -50,12 +50,13 @@ class SimpleCalcModel:
                         self._display += key
                 else:
                     if self._display == '0':
-                        self._display = key
-                    if key == ".":
-                        if "." in self._display:
-                            self._display = self._display
+                        if key == ".":
+                            if "." in self._display:
+                                self._display = self._display
+                            else:
+                                self._display += key
                         else:
-                            self._display += key
+                            self._display = key
                     else:
                         if self._display[-1] not in "+-*/":
                             self._display += key
