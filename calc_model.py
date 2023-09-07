@@ -8,8 +8,10 @@ class SimpleCalcModel:
 
     def calculate(self):
         try:
-            result = eval(self._display, globals())
-            self._display = str(result)
+            result = str(eval(self._display, globals()))
+            if "." in result and result[-2] == '.' and result[-1] == '0':
+                result = result[:-2]
+            self._display = result
         except Exception as e:
             print("Некорректное выражение:", e)
 
@@ -23,7 +25,7 @@ class SimpleCalcModel:
                         if self._display[-1] not in "+-*/":
                             if self._display[-1] == '.':
                                 self._display += key
-                            elif int(self._display[-1]) > 0:
+                            else:
                                 self._display += key
                     else:
                         self._display += key
@@ -57,6 +59,9 @@ class SimpleCalcModel:
                     else:
                         if self._display[-1] not in "+-*/":
                             self._display += key
+
+            if key == 'AC':
+                self._display = self._display[:-3]
 
             if key == "C":
                 self._display = "0"

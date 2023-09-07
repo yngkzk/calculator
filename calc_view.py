@@ -28,10 +28,15 @@ class CalculatorView(QWidget):
         self.main_display.setText(self.calc_model.get_display())
 
     def keyPressEvent(self, event):
+        print(event.key(), Qt.Key.Key_Backspace)
         key_text = event.text()
+        if event.key() == Qt.Key.Key_Backspace:
+            key_text = 'AC'
+        elif event.key() == Qt.Key.Key_Return or event.key() == Qt.Key.Key_Enter:
+            key_text = '='
+
         self.calc_model.command(key_text)
         self.main_display.setText(self.calc_model.get_display())
-        super().keyPressEvent(event)
 
     def __init__(self):
         super().__init__()
