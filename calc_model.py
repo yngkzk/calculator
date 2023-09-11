@@ -62,7 +62,12 @@ class SimpleCalcModel:
                             self._display += key
 
             if key == 'AC':
-                self._display = self._display[:-3]
+                self._display = self._display[:-2]
+                if len(self._display) <= 1: 
+                    self._display = "0"
+                else:
+                    self._display = self._display[:-1]
+                    
 
             if key == "C":
                 self._display = "0"
